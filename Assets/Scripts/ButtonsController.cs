@@ -11,6 +11,8 @@ public class ButtonsController : MonoBehaviour
     public void Start()
     {
         _settingsPanel.SetActive(false);
+
+        
     }
 
     public void PlayButton()
@@ -43,10 +45,20 @@ public class ButtonsController : MonoBehaviour
 
     }
 
-    public void SettingsButton()
+    public void SoundSettingsOpenButton()
     {
         _settingsPanel.SetActive(true);
+        
+    }
+    public void SoundSettingsCloseButton()
+    {
+        _settingsPanel.SetActive(false);
+
     }
 
+    public void OpenMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 
 }
