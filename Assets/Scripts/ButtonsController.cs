@@ -61,4 +61,10 @@ public class ButtonsController : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void RestartButton()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1;
+    }
+
 }

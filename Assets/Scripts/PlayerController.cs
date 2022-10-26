@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -7,17 +8,24 @@ public class PlayerController : MonoBehaviour
     private float xMove;
     private float zMove;
     Vector3 moveDirection;
+    [SerializeField] GameObject _losePanel;
+    
 
 
     void Start()
     {
         player = GetComponent<CharacterController>();
+        _losePanel.SetActive(false);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         PlayerMove();
+        if (transform.position.y < -2)
+        {
+            Lose();
+        }
     }
 
     public void PlayerMove()
@@ -31,6 +39,13 @@ public class PlayerController : MonoBehaviour
             moveDirection = transform.TransformDirection(moveDirection);
         }
         moveDirection.y -= 1;
-        player.Move(moveDirection * speed);
+        player.Move(moveDirection * speed * Time.deltaTime);
+    }
+
+    public void Lose()
+    {
+        _losePanel.SetActive(true);
+        Time.timeScale = 0;
+
     }
 }
