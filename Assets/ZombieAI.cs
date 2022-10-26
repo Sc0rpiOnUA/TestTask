@@ -10,7 +10,6 @@ public class ZombieAI : MonoBehaviour
     private Collider[] triggerRange;
     [SerializeField] ParticleSystem _boomParticle;
     private Animator anim;
-
     // Start is called before the first frame update
     void Start()
     {
