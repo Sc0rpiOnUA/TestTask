@@ -24,8 +24,13 @@ public class PlayerController : MonoBehaviour
     {
         xMove = Input.GetAxis("Horizontal");
         zMove = Input.GetAxis("Vertical");
-        moveDirection = new Vector3(xMove, 0f, zMove);
-        moveDirection = transform.TransformDirection(moveDirection);
-        player.Move(moveDirection);
+
+        if(player.isGrounded)
+        {
+            moveDirection = new Vector3(xMove, 0f, zMove);
+            moveDirection = transform.TransformDirection(moveDirection);
+        }
+        moveDirection.y -= 1;
+        player.Move(moveDirection * speed);
     }
 }
