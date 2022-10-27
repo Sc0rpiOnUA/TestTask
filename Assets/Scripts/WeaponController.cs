@@ -7,10 +7,10 @@ public class WeaponController : MonoBehaviour
     /*[SerializeField] Transform _gunSpownPoint;
     [SerializeField] GameObject _weaponPrefab;*/
 
-    [SerializeField] Transform _bulletSpownPoint;
+    [SerializeField] Transform _bulletSpawnPoint;
     [SerializeField] GameObject _bulletPrefab;
     [SerializeField] Camera _mainCamera;
-    [SerializeField] float _shootForce;
+    [SerializeField] float _bulletSpeed;
     //[SerializeField] KeyCode _keyCode;
 
     // Start is called before the first frame update
@@ -41,10 +41,15 @@ public class WeaponController : MonoBehaviour
             targetPoint = hit.point;
         }
 
-        Vector3 direction = targetPoint - _bulletSpownPoint.position;
+        Vector3 direction = targetPoint - _bulletSpawnPoint.position;
 
-        GameObject currentBullet = Instantiate(_bulletPrefab, _bulletSpownPoint.position, Quaternion.identity);
+        GameObject currentBullet = Instantiate(_bulletPrefab, _bulletSpawnPoint.position, _bulletSpawnPoint.rotation);
+
+        Vector3 force = new Vector3(0, 0, _bulletSpeed);
         currentBullet.transform.forward = direction.normalized;
-        currentBullet.GetComponent<Rigidbody>().AddForce(direction * _shootForce, ForceMode.Impulse);
+        currentBullet.GetComponent<Rigidbody>().AddRelativeForce(force, ForceMode.VelocityChange);
+
+        
+        //currentBullet.GetComponent<Rigidbody>().AddForce(direction * _bulletSpeed, ForceMode.VelocityChange);
     }
 }

@@ -18,6 +18,6 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
         else 
-            Destroy(gameObject, 2);
+            Destroy(gameObject, 0.5f);
     }
 }
