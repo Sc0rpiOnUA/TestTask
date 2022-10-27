@@ -4,28 +4,37 @@ using UnityEngine;
 
 public class MouseController : MonoBehaviour
 {
-    [SerializeField] Camera _player;
-    private float xRotation, yRotation;
+    [SerializeField] Camera _playerCamera;
+    private float localXRotation;
     private float xRotCurrent, yRotCurrent;
-    private float _mouseSensivity;
+    [SerializeField] private float _mouseSensivity;
     [SerializeField] GameObject _playerGO;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
-        
+        localXRotation = 0f;
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
+
+    void Update()
     {
         MouseMove();
     }
 
     private void MouseMove()
     {
-        xRotation += Input.GetAxis("Mouse X");
-        yRotation += Input.GetAxis("Mouse Y");
-        _player.transform.rotation = Quaternion.Euler(-yRotation, xRotation, 0);
-        _playerGO.transform.rotation = Quaternion.Euler(0, xRotation, 0);
+        float mouseX = Input.GetAxis("Mouse X") * _mouseSensivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * _mouseSensivity * Time.deltaTime;
+
+        localXRotation -= mouseY;
+        localXRotation = Mathf.Clamp(localXRotation, -90f, 90f);
+
+        _playerGO.transform.Rotate(Vector3.up * mouseX);
+        _playerCamera.transform.localRotation = Quaternion.Euler(localXRotation, 0f, 0f);
     }
 }
