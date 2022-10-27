@@ -21,11 +21,10 @@ public class WeaponController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            //Instantiate(_bulletPrefab, _bulletSpownPoint);
             Shot();
         };
         
@@ -41,10 +40,6 @@ public class WeaponController : MonoBehaviour
         {
             targetPoint = hit.point;
         }
-        /*else
-        {
-            targetPoint = 
-        }*/
 
         Vector3 direction = targetPoint - _bulletSpownPoint.position;
 
