@@ -360,11 +360,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1655964832106237712}
   - component: {fileID: 4619294541168940394}
-  - component: {fileID: 4781139083181456288}
   - component: {fileID: 3262432125307756862}
+  - component: {fileID: 7256411016441074501}
+  - component: {fileID: 3756923476649683978}
   m_Layer: 0
   m_Name: Zombie
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -407,19 +408,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!65 &4781139083181456288
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2139486423735801258}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2.05, z: 0.5}
-  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &3262432125307756862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -432,9 +420,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c95196312ad0c4c927a2d6305a1b56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 0.2
-  _range: 10.47
-  _boomParticle: {fileID: 2162304049546624710}
+  _speed: 0.1
+  _followRange: 10
+  _attackRange: 2
+--- !u!114 &7256411016441074501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139486423735801258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200e11910c2d4ee4f8a1a03de40d0320, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 5
+  _damage: 1
+  OnDead:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTakeDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGiveDamage:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!64 &3756923476649683978
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2139486423735801258}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2995519189794809805, guid: f9ce2dce5ed755f4080de70cb8c3e15f, type: 3}
 --- !u!1 &2239362901376044787
 GameObject:
   m_ObjectHideFlags: 0

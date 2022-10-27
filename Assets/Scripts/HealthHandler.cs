@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class HealthHandler : MonoBehaviour
 {
-    private static int _health = 3;
+    [SerializeField] private int _health;
     [SerializeField][Range(0,5)] private int _damage;
     public UnityEvent OnDead;
     public UnityEvent OnTakeDamage;
@@ -27,7 +27,8 @@ public class HealthHandler : MonoBehaviour
         {
             anim.SetBool("Dead", true);
 
-            OnDead.Invoke();
+            //OnDead.Invoke();
+            Destroy(gameObject);
         }
     }
 

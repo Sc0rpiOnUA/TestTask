@@ -25,6 +25,8 @@ public class ZombieAI : MonoBehaviour
     {
         if ((FindPlayerAtRange(_followRange) != null)&&(FindPlayerAtRange(_attackRange)==null))
         {
+            Vector3 lookTarget = new Vector3(FindPlayerAtRange(_followRange).transform.position.x, 0f, FindPlayerAtRange(_followRange).transform.position.z);
+
             anim.SetFloat("WalkSpeed",_speed*25);
             anim.SetBool("Walk",true);
             transform.position = Vector3.MoveTowards(transform.position, FindPlayerAtRange(_followRange).transform.position,_speed);

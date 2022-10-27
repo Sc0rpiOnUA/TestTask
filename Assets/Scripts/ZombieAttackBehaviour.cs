@@ -13,7 +13,7 @@ public class ZombieAttackBehaviour : StateMachineBehaviour
         range = animator.GetComponent<ZombieAI>()._attackRange;
         zombieAI = animator.GetComponent<ZombieAI>();
         healthHandler = animator.GetComponent<HealthHandler>();
-        zombieAI.FindPlayerAtRange(range).GetComponent<HealthHandler>().TakeDamage(healthHandler.GiveDamage());
+        //zombieAI.FindPlayerAtRange(range).GetComponent<HealthHandler>().TakeDamage(healthHandler.GiveDamage());
 
     }
 

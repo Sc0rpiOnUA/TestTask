@@ -12,9 +12,13 @@ public class Bullet : MonoBehaviour
 
     public void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Enemy"))
+        GameObject targetGameObject = collision.collider.gameObject;
+        Debug.Log("Collided with " + targetGameObject);
+        if (targetGameObject.CompareTag("Enemy"))
         {
             //enemylife--
+            targetGameObject.GetComponent<HealthHandler>().TakeDamage(1);
+
             Destroy(gameObject);
         }
         else 
