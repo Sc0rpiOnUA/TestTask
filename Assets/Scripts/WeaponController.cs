@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class WeaponController : MonoBehaviour
 {
-    [SerializeField] Transform _gunSpownPoint;
-    [SerializeField] GameObject _weaponPrefab;
+    /*[SerializeField] Transform _gunSpownPoint;
+    [SerializeField] GameObject _weaponPrefab;*/
+
     [SerializeField] Transform _bulletSpownPoint;
     [SerializeField] GameObject _bulletPrefab;
-    [SerializeField] KeyCode _keyCode;
+    [SerializeField] Camera _mainCamera;
+    [SerializeField] float _shootForce;
+    //[SerializeField] KeyCode _keyCode;
 
     // Start is called before the first frame update
     void Start()
     {
-        Instantiate(_weaponPrefab, _gunSpownPoint);
+        //Instantiate(_weaponPrefab, _gunSpownPoint);
         
     }
 
@@ -22,13 +25,31 @@ public class WeaponController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            Instantiate(_bulletPrefab, _bulletSpownPoint);
+            //Instantiate(_bulletPrefab, _bulletSpownPoint);
+            Shot();
         };
         
     }
 
-    public void Shot()
+    private void Shot()
     {
-        Instantiate(_bulletPrefab, _bulletSpownPoint);
+        Ray ray = _mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        RaycastHit hit;
+
+        Vector3 targetPoint = ray.GetPoint(175);
+        if (Physics.Raycast(ray, out hit))
+        {
+            targetPoint = hit.point;
+        }
+        /*else
+        {
+            targetPoint = 
+        }*/
+
+        Vector3 direction = targetPoint - _bulletSpownPoint.position;
+
+        GameObject currentBullet = Instantiate(_bulletPrefab, _bulletSpownPoint.position, Quaternion.identity);
+        currentBullet.transform.forward = direction.normalized;
+        currentBullet.GetComponent<Rigidbody>().AddForce(direction * _shootForce, ForceMode.Impulse);
     }
 }
