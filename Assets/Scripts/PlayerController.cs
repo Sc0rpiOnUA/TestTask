@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     {
         player = GetComponent<CharacterController>();
         _losePanel.SetActive(false);
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
