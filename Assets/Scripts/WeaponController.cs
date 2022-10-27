@@ -42,6 +42,7 @@ public class WeaponController : MonoBehaviour
         }
 
         Vector3 direction = targetPoint - _bulletSpawnPoint.position;
+        _bulletSpawnPoint.LookAt(targetPoint);
 
         GameObject currentBullet = Instantiate(_bulletPrefab, _bulletSpawnPoint.position, _bulletSpawnPoint.rotation);
 
