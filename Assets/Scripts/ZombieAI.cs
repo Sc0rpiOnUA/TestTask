@@ -2,18 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class ZombieAI : MonoBehaviour
 {
     [SerializeField] [Range(0,3)] private float _speed;
-    [SerializeField] private float _followRange;
-    [SerializeField] private float _attackRange;
+    public float _followRange;
+    public float _attackRange;
     private Collider[] triggerRange;
-    [SerializeField] ParticleSystem _boomParticle;
     private Animator anim;
+    private HealthHandler healthHandler;
+  
+
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
+        healthHandler = GetComponent<HealthHandler>();
     }
 
     // Update is called once per frame
@@ -23,24 +27,24 @@ public class ZombieAI : MonoBehaviour
         {
             anim.SetFloat("WalkSpeed",_speed*25);
             anim.SetBool("Walk",true);
-            transform.position = Vector3.MoveTowards(transform.position, FindPlayerAtRange(_followRange).position,_speed);
-            transform.LookAt(FindPlayerAtRange(_followRange));
+            transform.position = Vector3.MoveTowards(transform.position, FindPlayerAtRange(_followRange).transform.position,_speed);
+            transform.LookAt(FindPlayerAtRange(_followRange).transform);
         }
         else if (FindPlayerAtRange(_attackRange) != null)
         {
             anim.SetBool("Attack", true);
             anim.SetBool("Walk", false);
-            _boomParticle.Play();
 
+            
         }
         else
         {
             anim.SetBool("Attack", false);
             anim.SetBool("Walk", false);
         }
-
+       
     }
-    private Transform FindPlayerAtRange(float range)
+    public GameObject FindPlayerAtRange(float range)
     {
         triggerRange = Physics.OverlapSphere(transform.position, range);
 
@@ -48,7 +52,7 @@ public class ZombieAI : MonoBehaviour
         {
             if (collider.transform.tag == "Player")
             {
-                return collider.transform;
+                return collider.gameObject;
             }
         }
         return null;
