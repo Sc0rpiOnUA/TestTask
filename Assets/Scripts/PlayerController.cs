@@ -44,6 +44,7 @@ public class PlayerController : MonoBehaviour
 
     public void Lose()
     {
+        Cursor.lockState = CursorLockMode.None;
         _losePanel.SetActive(true);
         Time.timeScale = 0;
 
