@@ -11,7 +11,10 @@ public class ZombieAI : MonoBehaviour
     private Collider[] triggerRange;
     private Animator anim;
     private HealthHandler healthHandler;
-  
+
+    //Hacky way to make zombies not floaty
+    [SerializeField] float groundHeight;
+
 
     // Start is called before the first frame update
     void Start()
@@ -23,16 +26,19 @@ public class ZombieAI : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if ((FindPlayerAtRange(_followRange) != null)&&(FindPlayerAtRange(_attackRange)==null))
+        GameObject followedObject = FindPlayerAtRange(_followRange);
+        GameObject attackObject = FindPlayerAtRange(_attackRange);
+
+        if ((followedObject != null)&&(attackObject == null))
         {
-            Vector3 lookTarget = new Vector3(FindPlayerAtRange(_followRange).transform.position.x, 0f, FindPlayerAtRange(_followRange).transform.position.z);
+            Vector3 lookTarget = new Vector3(followedObject.transform.position.x, groundHeight, followedObject.transform.position.z);
 
             anim.SetFloat("WalkSpeed",_speed*25);
             anim.SetBool("Walk",true);
-            transform.position = Vector3.MoveTowards(transform.position, FindPlayerAtRange(_followRange).transform.position,_speed);
-            transform.LookAt(FindPlayerAtRange(_followRange).transform);
+            transform.position = Vector3.MoveTowards(transform.position, lookTarget, _speed);
+            transform.LookAt(followedObject.transform);
         }
-        else if (FindPlayerAtRange(_attackRange) != null)
+        else if (attackObject != null)
         {
             anim.SetBool("Attack", true);
             anim.SetBool("Walk", false);
