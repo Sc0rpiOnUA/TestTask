@@ -17,11 +17,11 @@ public class MouseController : MonoBehaviour
 
     void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
 
-    void FixedUpdate()
+    void Update()
     {
         MouseMove();
     }

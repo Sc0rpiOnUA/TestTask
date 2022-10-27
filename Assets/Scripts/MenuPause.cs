@@ -16,6 +16,7 @@ public class MenuPause : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Escape))
         {
+            Cursor.lockState = CursorLockMode.None;
             _gameMenuPanel.SetActive(true);
             Time.timeScale = 0;
         }
@@ -23,6 +24,7 @@ public class MenuPause : MonoBehaviour
     }
     public void BackToGameButton()
     {
+        Cursor.lockState = CursorLockMode.Locked;
         _gameMenuPanel.SetActive(false);
         Time.timeScale = 1;
     }
